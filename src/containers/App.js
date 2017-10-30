@@ -7,12 +7,13 @@ import { MainRedux } from '../components/MainRedux';
 //import actions
 import { setName } from '../actions/userActions';
 
+
 class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <MainRedux changeUsername={this.props.setName}/>
-                <UserRedux username={this.props.user.name}/>
+              <MainRedux changeUsername={this.props.setName}/>
+              <UserRedux username={this.props.user.name}/>
             </div>
         );
     }

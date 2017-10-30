@@ -1,0 +1,100 @@
+html, body{
+  font-family: $font-sans;
+}
+$rwd-typography: (
+        default: (
+                base-font-size: 13px,
+                vertical-rhythm: 1.414,
+                type-scale: 1.2,
+                min-width: null
+        ),
+        medium: (
+                base-font-size: 15px,
+                vertical-rhythm: 1.5,
+                type-scale: 1.414,
+                min-width: 480px
+        ),
+        large: (
+                base-font-size: 16px,
+                vertical-rhythm: 1.618,
+                type-scale: 1.5,
+                min-width: 1025px
+        ),
+        xlarge: (
+                base-font-size: 17px,
+                vertical-rhythm: 1.618,
+                type-scale: 1.618,
+                min-width: 1300px
+        )
+);
+
+$rwd-scale-labels: (p,  sh-medium, sh, h, hero);
+
+@function rwd-generate-font-size($label, $breakpoint) {
+  $label-position: index($rwd-scale-labels, $label);
+  $breakpoint-base-font-size: map-get(map-get($rwd-typography, $breakpoint), base-font-size);
+  $breakpoint-type-scale: map-get(map-get($rwd-typography, $breakpoint), type-scale);
+  $breakpoint-vertical-rhythm: map-get(map-get($rwd-typography, $breakpoint), vertical-rhythm);
+  $font-size: $breakpoint-base-font-size;
+  @for $i from 1 to $label-position {
+    $font-size: $font-size * $breakpoint-type-scale;
+  }
+  $base-vertical-rhythm: $breakpoint-base-font-size * $breakpoint-vertical-rhythm;
+  $line-height: round($font-size / $base-vertical-rhythm) * $base-vertical-rhythm / $font-size;
+  $return: join($font-size, $line-height);
+  @return $return;
+}
+
+@each $label in $rwd-scale-labels {
+  %#{$label} {
+    @each $breakpoint, $data in $rwd-typography {
+      $generated-values: rwd-generate-font-size($label, $breakpoint);
+      $font-size: round(nth($generated-values, 1)*10)/10;
+      $line-height: round(nth($generated-values, 2)*100)/100;
+
+      @if map-get($data, min-width) != null {
+        @media screen and (min-width: map-get($data, min-width)) {
+          font-size: $font-size;
+          line-height: $line-height;
+        }
+      } @else {
+        font-size: $font-size;
+        line-height: $line-height;
+      }
+    }
+  }
+}
+
+body {
+  @extend %p;
+}
+//h4 {
+//  @extend %sh-small;
+//}
+h3 {
+  @extend %sh-medium;
+}
+
+
+
+
+h2 {
+  @extend %sh;
+}
+h1 {
+  @extend %h;
+}
+.header__title {
+  @extend %hero;
+}
+
+@include headings {
+ margin: 20px 0 10px 0;
+  font-family: $font-cursive;
+  color: $color-accent-text;
+  @include media("(min-width:500px)") {
+    margin-bottom: 20px;
+  }
+
+}
+

@@ -1,0 +1,38 @@
+//media queries
+@mixin media($queryString){
+  @media #{$queryString} {
+    @content;
+  }
+}
+
+//set vendor prefix
+@mixin prefix($property, $value, $vendors: webkit moz ms o) {
+  @if $vendors {
+    @each $vendor in $vendors {
+      #{"-" + $vendor + "-" + $property}: #{$value};
+    }
+  }
+  #{$property}: #{$value};
+}
+
+
+//set font-size and line-height
+@mixin size-height($sizeValue, $height){
+  font-size:$sizeValue;
+  line-height: $height;
+
+}
+@mixin vertical-align($position: absolute) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin headings {
+  h1, h2, h3,
+  h4, h5, h6 {
+    @content;
+  }
+}
