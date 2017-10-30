@@ -1,0 +1,114 @@
+*,
+*:before,
+*:after{
+  @include prefix(box-sizing, border-box, webkit moz);
+}
+
+
+.container {
+  @extend %clearfix;
+  width: 100%;
+  @include media("(min-width:1024px)"){
+    width: $container-width;
+    margin: 0 auto;
+  }
+}
+
+.container-wide {
+  @extend %clearfix;
+  width: 100%;
+}
+
+.row{
+  @extend %clearfix;
+  width: 100%;
+}
+
+.col-1 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 8.333333333333332%
+  }
+}
+
+.col-2 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 16.666666666666664%
+  }
+}
+
+.col-3 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 25%
+  }
+}
+
+.col-4 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 33.33333333333333%
+  }
+
+}
+
+.col-5 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 41.66666666666667%
+  }
+}
+
+.col-6 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 50%
+  }
+}
+
+.col-7 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 58.333333333333336%
+
+  }
+}
+
+.col-8 {
+  @extend %col-x;
+  @include media("(min-width:768px)") {
+    width: 66.66666666666666%
+  }
+}
+
+.col-9 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 75%
+  }
+}
+
+.col-10 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 83.33333333333334%
+  }
+}
+
+.col-11 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 91.66666666666666%
+  }
+}
+
+.col-12 {
+  @extend %col-x;
+  @include media("(min-width: 768px)") {
+    width: 100%
+  }
+}
+
+
+

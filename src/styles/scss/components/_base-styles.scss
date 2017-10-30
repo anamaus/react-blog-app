@@ -1,0 +1,13 @@
+body{
+  background-color: $color-white;
+  color: $color-primary-text;
+}
+
+a{
+  @extend %transitions;
+  color: $color-white;
+  &:hover{
+    color: $color-grey;
+  }
+}
+

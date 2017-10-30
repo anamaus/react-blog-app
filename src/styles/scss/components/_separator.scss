@@ -1,0 +1,24 @@
+
+.separator {
+  background-color: $color-separator;
+
+}
+.quote {
+  color: #fff;
+  text-align: center;
+  font-family: $font-cursive;
+  font-size: 18px;
+  padding: 20px ;
+   @include media("(min-width: 550px)") {
+     padding: 50px ;
+
+  }@include media("(min-width: 768px)") {
+    font-size: 22px;
+    padding: 70px ;
+
+  }
+  @include media("(min-width: 1200px)") {
+    font-size: 28px;
+    padding: 100px ;
+  }
+}

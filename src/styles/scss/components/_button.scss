@@ -1,0 +1,37 @@
+.btn{
+  @extend %transitions;
+  display: inline-block;
+  padding:10px 22px;
+  margin: 20px auto;
+  text-transform: uppercase;
+  font-size: 15px;
+  line-height: 15px;
+  font-family: $font-sans;
+  font-weight: $font-weight-bold;
+  color: $color-button-bg;
+  border: 2px solid $color-button-bg;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    @extend %transitions;
+    content: '';
+    position: absolute;
+    z-index: -1;
+       width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $color-button-bg;
+
+  }
+  &:hover::after{
+    width: 100%;
+  }
+  &:hover{
+    color: #ffffff;
+  }
+
+
+}

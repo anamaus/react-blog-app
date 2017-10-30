@@ -1,0 +1,22 @@
+footer {
+  height: 50px;
+  background-color: $color-footer;
+  position: relative;
+
+}
+
+.copyright{
+  @include vertical-align($position: absolute);
+  padding-left: 5px;
+  @include media("(min-width: 1024px)") {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-left: 0;
+  }
+
+//  @include vertical-align($position: absolute);
+  color:#ffffff;
+
+}
