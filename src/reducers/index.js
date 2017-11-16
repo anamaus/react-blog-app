@@ -2,9 +2,7 @@ import {combineReducers} from "redux";
 
 //import reducers
 import userReducer from "./userReducer";
-import exampleReducer from "./exampleReducer";
+import postReducer from "./postReducer";
 
-//combine all the imported reducers into one const nthat we export and import in store.
-const combinedReducers  = combineReducers({exampleReducer, userReducer});
-
-export default combinedReducers;
+//combine all the imported reducers and export, then import in store.
+export default combineReducers({postReducer, userReducer});

@@ -1,13 +1,18 @@
-export function addNumber(number) {
+//normal action
+export function setAge(age) {
   return {
-    type: "ADD",
-    payload: number
+    type: "SET_AGE",
+    payload: age,
   }
 }
-
-export function subtractNumber(number) {
-  return {
-    type: "SUBTRACT",
-    payload: number
+//action with thunk, returns a function
+export function setName(name) {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch({
+        type: "SET_NAME",
+        payload: name,
+      });
+    },3000);
   }
 }

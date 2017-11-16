@@ -5,9 +5,20 @@ body{
 
 a{
   @extend %transitions;
-  color: $color-white;
+  color: $color-grey;
   &:hover{
     color: $color-grey;
   }
 }
 
+.panel-date {
+  margin-top: 30px;
+}
+
+.panel-author {
+  margin-top: 30px;
+}
+
+.panel-content {
+  margin-bottom: 30px;
+}

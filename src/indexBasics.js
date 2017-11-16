@@ -19,50 +19,6 @@ import {HeaderRouter} from './components/HeaderRouter';
 import {HomeRouter} from './components/HomeRouter';
 import {User} from './components/User';
 
-//reducers are responsible for changing the state.
-const mathReducer = (state = {
-    result: 1,
-    lastValues: []
-}, action) => {
-    switch (action.type) {
-        case "ADD":
-            state = {
-                ...state,
-                result: state.result + action.payload,
-                lastValues: [...state.lastValues, action.payload]
-            };
-            break;
-        case "SUBTRACT":
-            state = {
-                ...state,
-                result: state.result - action.payload,
-                lastValues: [...state.lastValues, action.payload]
-            };
-            break;
-    }
-    return state;
-};
-
-const userReducer = (state = {
-    name: "Max",
-    age: 27
-}, action) => {
-    switch (action.type) {
-        case "SET_NAME":
-            state = {
-                ...state,
-                name: action.payload
-            };
-            break;
-        case "SET_AGE":
-            state = {
-                ...state,
-                age: action.payload
-            };
-            break;
-    }
-    return state;
-};
 
 //middleware is executed before the store(state) is changed.
 const myLoggerMiddleware = (store) => (next) => (action) => {

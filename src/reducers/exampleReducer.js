@@ -1,11 +1,10 @@
 //reducers are responsible for changing the state.
-//reducers are responsible for changing the state.
 const initialState ={
   name: "Max",
   age: 27
 }
 
-const exampleReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_NAME":
           return {
@@ -21,4 +20,4 @@ const exampleReducer = (state = initialState, action) => {
     }
     return state;
 };
-export default  exampleReducer;
+export default  userReducer;

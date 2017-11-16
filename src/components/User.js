@@ -7,7 +7,6 @@ onNavigateHome(){
 
 
   render() {
-    console.log(this.props);
     return(
       <div>
         <h3>User</h3>
