@@ -12,16 +12,20 @@ class App extends React.Component {
     this.props.fetchPosts();
   }
 
+  getBlogHandler() {
+    console.log('blog fetched');
+  }
+
   render() {
     const  { blogs } = this.props;
 
-    console.log(JSON.stringify (blogs, null, 2))
+    // console.log(JSON.stringify (blogs, null, 2))
 
     //render list if blogs are fetched
     let blogList = null;
 
     if(this.props.blogsFetched) {
-      blogList = <BlogList blogs={ blogs }/>
+      blogList = <BlogList blogs={ blogs } getBlog={this.getBlogHandler.bind(this)}/>
     }
     //render list ends.
 
