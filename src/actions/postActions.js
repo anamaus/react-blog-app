@@ -4,10 +4,10 @@ It returns a function that takes dispatch as its only argument and dispatches an
 
 const apiUrl = 'http://localhost:2403';
 
-export const fetchPostsSuccess = (posts) => {
+export const fetchPostsSuccess = (blogs) => {
   return {
     type: 'POSTS_FETCH_POSTS_SUCCESS',
-    payload: posts,
+    payload: blogs,
   }
 };
 
@@ -18,7 +18,18 @@ export const fetchPosts = () => {
     // Returns a promise
     Axios.get(apiUrl+"/posts")
     .then(function (response) {
-      dispatch(fetchPostsSuccess(response.data));
+
+      let blogs = response.data;
+
+      blogs.map(blog => {
+        Axios.get(apiUrl+"/users/" + blog.userId)
+        .then( result => {
+          blog.author = result.data.name;
+
+          return blog;
+        });
+      })
+      dispatch(fetchPostsSuccess(blogs));
     })
     .catch(function (error) {
       console.log(error);
@@ -27,19 +38,19 @@ export const fetchPosts = () => {
   }
 };
 
-export const getPostSuccess = (post) => {
+export const getPostSuccess = (blog) => {
   return {
     type: 'POST_GET_POST',
-    payload: post,
+    payload: blog,
   }
 };
 
-export const getPost = (userId, postId) => {
+export const getPost = (userId, blogId) => {
   // Returns a dispatcher function
   // that dispatches an action at a later time
   return (dispatch) => {
     // Returns a promise
-    Axios.get(apiUrl+postId)
+    Axios.get(apiUrl+blogId)
     .then(function (response) {
       // Dispatch another action
         // to consume data

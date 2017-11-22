@@ -9,7 +9,7 @@ import { Header } from './components/Header';
 import { Login } from './components/Login';
 import Register from './components/Register';
 import SingleUser from './containers/SingleUser';
-import SingleBlogPost from './containers/SingleBlogPost';
+// import SingleBlogPost from './containers/SingleBlogPost';
 
 //to connect react and redux we import Provider
 import { Provider } from 'react-redux';
@@ -30,8 +30,8 @@ ReactDOM.render(
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-            <Route exact path="/users/:id" component={SingleUser}  />
-              <Route path="/users/:userId/posts/:postId" component={SingleBlogPost}  />
+              <Route exact path="/users/:id" component={SingleUser}  />
+              {/* <Route path="/users/:userId/posts/:postId" component={SingleBlogPost}  /> */}
               {/* or use extended name ie.  /users/id */}
             </Switch>
         </div>

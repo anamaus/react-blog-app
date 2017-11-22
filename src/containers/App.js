@@ -1,46 +1,46 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import BlogListing from "../components/BlogListing"
+import BlogList from "../components/Blog/BlogList"
 
 //import actions
 import { fetchPosts } from '../actions/postActions';
 
-
 class App extends React.Component {
-
-  // constructor(props){
-  //   super();
-  // }
 
   componentWillMount(){
     this.props.fetchPosts();
   }
 
-    render() {
-      const  { posts } = this.props;
-      let blogListing = null;
+  render() {
+    const  { blogs } = this.props;
 
-      if(this.props.postsFetched) {
-        blogListing = posts.map((post,index) => <BlogListing {...post} key={index} />)
-      }
+    console.log(JSON.stringify (blogs, null, 2))
 
-        return (
-            <div className="container">
-              <h1>Welcome to Mis Blog</h1>
-              <hr/>
-              { blogListing }
-            </div>
-        );
+    //render list if blogs are fetched
+    let blogList = null;
+
+    if(this.props.blogsFetched) {
+      blogList = <BlogList blogs={ blogs }/>
     }
+    //render list ends.
+
+      return (
+          <div className="container">
+            <h1>Welcome to Mis Blog</h1>
+            <hr/>
+            { blogList }
+          </div>
+      );
+  }
 }
 
 //set which props from state you need in this component.
 const mapStateToProps = (state) => {
   return {
-    posts: state.postReducer.posts,
-    postsFetched: state.postReducer.postsFetched,
-    currentUser: state.userReducer.currentUser
+    blogs: state.postReducer.blogs,
+    blogsFetched: state.postReducer.blogsFetched,
+    // currentUser: state.userReducer.currentUser
   }
 }
 

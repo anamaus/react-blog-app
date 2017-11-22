@@ -1,11 +1,11 @@
 import React from "react";
-import {BlogListingSingleUser} from "../components/BlogListingSingleUser"
+import {BlogListingSingleUser} from "../components/Blog/BlogListingSingleUser"
 
 export const SingleUserPage = (props) => {
   let blogs = props.posts.map((post,index) => <BlogListingSingleUser
     {...post}
     content={post.content.length < 50 ? post.content : post.content.substr(0,50) + "..."}
-    key={index} 
+    key={index}
   />)
   return (
     <div className="container">

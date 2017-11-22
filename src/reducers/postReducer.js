@@ -1,6 +1,6 @@
 const initialState = {
-  posts: [],
-  postsFetched: false,
+  blogs: [],
+  blogsFetched: false,
   post: {},
   isPostFetched: false,
 
@@ -11,8 +11,8 @@ const PostReducer = (state=initialState, action) => {
     case "POSTS_FETCH_POSTS_SUCCESS":
       return {
         ...state,
-        posts: action.payload,
-        postsFetched: true,
+        blogs: action.payload,
+        blogsFetched: true,
       }
     case "POST_GET_POST":
       return {
