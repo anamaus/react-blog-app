@@ -8,7 +8,8 @@ import { fetchPosts } from '../actions/postActions';
 
 class App extends React.Component {
 
-  componentWillMount(){
+  componentDidMount(){
+    console.log('didMount')
     this.props.fetchPosts();
   }
 
@@ -17,9 +18,10 @@ class App extends React.Component {
   }
 
   render() {
-    const  { blogs } = this.props;
+    console.log('render')
+    console.log('from App.js', JSON.stringify (this.props.blogs, null, 2))
 
-    // console.log(JSON.stringify (blogs, null, 2))
+    const  { blogs } = this.props;
 
     //render list if blogs are fetched
     let blogList = null;

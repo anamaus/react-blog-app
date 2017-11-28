@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /mongo_data
+.idea/*
 
 # testing
 /coverage

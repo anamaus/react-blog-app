@@ -11,25 +11,38 @@ export const fetchPostsSuccess = (blogs) => {
   }
 };
 
+export const postsFetched = (bool) => {
+  return {
+    type: 'POSTS_FETCHED',
+    payload: bool,
+  }
+};
+
 export const fetchPosts = () => {
+
   // Returns a dispatcher function
   // that dispatches an action at a later time
   return (dispatch) => {
+    dispatch(postsFetched(false));
     // Returns a promise
     Axios.get(apiUrl+"/posts")
     .then(function (response) {
 
       let blogs = response.data;
 
+      return blogs;
+    })
+    .then(function(blogs){
       blogs.map(blog => {
         Axios.get(apiUrl+"/users/" + blog.userId)
         .then( result => {
           blog.author = result.data.name;
-
-          return blog;
+          return Axios.all(blogs)
+        })
+        .then(blogs => {
+          dispatch(fetchPostsSuccess(blogs));
         });
       })
-      dispatch(fetchPostsSuccess(blogs));
     })
     .catch(function (error) {
       console.log(error);

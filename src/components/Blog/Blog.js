@@ -3,7 +3,8 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 const blog = (props) => {
-  console.log(JSON.stringify (props, null, 2))
+  // console.log(JSON.stringify (props, null, 2))
+  
   return (
     <div className="panel panel-default">
       <div className="panel-heading">{props.title}</div>
