@@ -4,12 +4,12 @@ import {Router, Route, Switch} from "react-router-dom";
 import createBrowserHistory from 'history/createBrowserHistory';
 import './styles/scss/style.css';
 
-import App from './containers/App';
-import { Header } from './components/Header';
-import { Login } from './components/Login';
-import Register from './components/Register';
-import SingleUser from './containers/SingleUser';
-// import SingleBlogPost from './containers/SingleBlogPost';
+import App from './App';
+import Header  from './components/Header';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import Post from "./containers/Posts/SinglePost";
+import UserPosts from './containers/Users/UserPosts/UserPosts';
 
 //to connect react and redux we import Provider
 import { Provider } from 'react-redux';
@@ -22,7 +22,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={newHistory}>
         <div>
-            <Header/>
+            <Header history={newHistory}/>
           {/* switch: render only one of these routes
               exact renders only if exact path
             */}
@@ -30,9 +30,8 @@ ReactDOM.render(
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route exact path="/users/:id" component={SingleUser}  />
-              {/* <Route path="/users/:userId/posts/:postId" component={SingleBlogPost}  /> */}
-              {/* or use extended name ie.  /users/id */}
+              <Route exact path="/posts/:id" component={Post}  />
+               <Route path="/users/:userId" component={UserPosts}  />
             </Switch>
         </div>
     </Router>

@@ -1,0 +1,13 @@
+.UserPosts-heading  {
+    position: relative;
+
+    margin-bottom: 50px;
+}
+
+.UserPosts-heading button {
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    transform: translateY(-50%);
+}

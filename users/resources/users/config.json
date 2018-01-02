@@ -8,6 +8,14 @@
 			"required": true,
 			"id": "name",
 			"order": 0
+		},
+		"password": {
+			"name": "password",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "password",
+			"order": 1
 		}
 	}
 }

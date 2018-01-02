@@ -27,10 +27,7 @@ export const fetchPosts = () => {
     // Returns a promise
     Axios.get(apiUrl+"/posts")
     .then(function (response) {
-
-      let blogs = response.data;
-
-      return blogs;
+      return response.data;
     })
     .then(function(blogs){
       blogs.map(blog => {
@@ -41,6 +38,10 @@ export const fetchPosts = () => {
         })
         .then(blogs => {
           dispatch(fetchPostsSuccess(blogs));
+          dispatch(postsFetched(true));
+        })
+        .catch(function (error) {
+            console.log(error);
         });
       })
     })
@@ -51,28 +52,79 @@ export const fetchPosts = () => {
   }
 };
 
-export const getPostSuccess = (blog) => {
+export const getPostSuccess = (post) => {
   return {
     type: 'POST_GET_POST',
-    payload: blog,
+    payload: post,
   }
 };
 
-export const getPost = (userId, blogId) => {
+export const fetchPost = (blogId) => {
   // Returns a dispatcher function
   // that dispatches an action at a later time
   return (dispatch) => {
     // Returns a promise
-    Axios.get(apiUrl+blogId)
-    .then(function (response) {
-      // Dispatch another action
-        // to consume data
-      dispatch(getPostSuccess(response.data));
-      console.log('actionPost', response.data);
-    })
+    Axios.get(apiUrl+ "/posts/" + blogId)
+        .then(function (response) {
+            return response.data;
+        })
+        .then(function(post){
+                Axios.get(apiUrl+"/users/" + post.userId)
+                    .then( result => {
+                        post.author = result.data.name;
+                        return post
+                    })
+                    .then(post => {
+                        dispatch(getPostSuccess(post));
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+        })
     .catch(function (error) {
       console.log(error);
     });
 
   }
+};
+
+export const getAllPostFromUserSuccess = (posts) => {
+    return {
+        type: 'POST_GET_ALL_POSTS_FROM_USER',
+        payload: posts,
+    }
+};
+
+export const fetchAllPostsFromUser = (userId) => {
+    return (dispatch) => {
+        let allPosts=[];
+        Axios.get(apiUrl+ "/posts")
+            .then (result => {
+                for (let i =0; i < result.data.length; i++){
+                    if(result.data[i].userId === userId) {
+                        allPosts.push(result.data[i]);
+                    }
+                }
+                return allPosts;
+            })
+            .then(function(allPosts){
+                allPosts.map(post => {
+                    Axios.get(apiUrl+"/users/" + post.userId)
+                        .then( result => {
+                            post.author = result.data.name;
+                            return Axios.all(allPosts)
+                        })
+                        .then(allPosts => {
+                            dispatch(getAllPostFromUserSuccess(allPosts));
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 };
