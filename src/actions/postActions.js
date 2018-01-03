@@ -128,3 +128,18 @@ export const fetchAllPostsFromUser = (userId) => {
             });
     }
 };
+
+export const fetchPostEdit = (blogId) => {
+    return (dispatch) => {
+        Axios.get(apiUrl+ "/posts/" + blogId)
+            .then(function (response) {
+                return response.data;
+            })
+            .then(post => {
+                dispatch(getPostSuccess(post));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+};

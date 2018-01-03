@@ -6,35 +6,32 @@ import './SinglePost.css';
 
 class Post extends React.Component {
 
-    state = {
-        editMode: false,
-        title: '',
-        content: '',
-    };
+    // state = {
+    //     editMode: false,
+    //     title: '',
+    //     content: '',
+    // };
 
     componentDidMount(){
         this.props.fetchPost(this.props.match.params.id);
-
-        this.setState({
-            title: this.props.post.title,
-            content: this.props.post.content,
-        })
+        // this.setState({
+        //     title: this.props.post.title,
+        //     content: this.props.post.content,
+        // })
     }
-
-    componentWillReceiveProps(nextProps) {
-        // You don't have to do this check first, but it can help prevent an unneeded render
-        if (nextProps.post.title !== this.state.title) {
-            this.setState({
-                title: nextProps.post.title,
-                content: nextProps.post.content,
-            });
-        }
-    }
+    //
+    // componentWillReceiveProps(nextProps) {
+    //     // You don't have to do this check first, but it can help prevent an unneeded render
+    //     if (nextProps.post.title !== this.state.title) {
+    //         this.setState({
+    //             title: nextProps.post.title,
+    //             content: nextProps.post.content,
+    //         });
+    //     }
+    // }
 
     onEditHandler = () => {
-        this.setState({
-            editMode: true,
-        })
+       this.props.history.push(this.props.match.url + '/edit');
     };
 
     onSubmitHandler = (e) => {
@@ -67,28 +64,28 @@ class Post extends React.Component {
                 </div>
             </div>;
 
-        if (this.state.editMode) {
-           singlePost =
-                <div className='Edit col-sm-6 col-sm-offset-3'>
-                    <form onSubmit={this.onSubmitHandler}>
-                        <div>
-                            <label>
-                                Title:
-                                <input type="text" value={this.state.title} />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Content:
-                                <textarea value={this.state.content} />
-                            </label>
-                        </div>
-                        <div>
-                            <input type="submit" value="Submit" />
-                        </div>
-                    </form>
-                </div>
-        }
+        // if (this.state.editMode) {
+        //    singlePost =
+        //         <div className='Edit col-sm-6 col-sm-offset-3'>
+        //             <form onSubmit={this.onSubmitHandler}>
+        //                 <div>
+        //                     <label>
+        //                         Title:
+        //                         <input type="text" value={this.state.title} />
+        //                     </label>
+        //                 </div>
+        //                 <div>
+        //                     <label>
+        //                         Content:
+        //                         <textarea value={this.state.content} />
+        //                     </label>
+        //                 </div>
+        //                 <div>
+        //                     <input type="submit" value="Submit" />
+        //                 </div>
+        //             </form>
+        //         </div>
+        // }
 
         return (
             <div className="container">
