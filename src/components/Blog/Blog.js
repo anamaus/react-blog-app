@@ -11,10 +11,9 @@ const blog = (props) => {
           <div className="panel-heading">{props.title}</div>
           <div className="panel-body">
               <div className="panel-content">{props.content.length < 50 ? props.content : props.content.substr(0,50) + "..."}</div>
-              {/*<button  className="btn btn-success"  onClick={props.getPost}>Read post</button>*/}
               <Link to={"/posts/"+props.id} className="btn btn-success">Read more</Link>
               {/* <div className="panel-date">{props.posts[0].date.$date}</div> */}
-              <div className={props.isUserAuthenticated ? "hidden" : "panel-author"}>by <Link to={"/users/"+props.userId}>{props.author}</Link></div>
+              <div className={props.isHidden ? "hidden" : "panel-author"}>by <Link to={"/users/"+props.userId}>{props.author}</Link></div>
           </div>
       </div>
   );

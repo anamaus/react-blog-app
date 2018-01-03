@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import {connect} from 'react-redux';
 import {removeCurrentUser} from "../actions/userActions";
 import Wrapper from '../hoc/Wrapper';
+import {withRouter} from "react-router-dom";
 
 //STATELESS component, a component with no state, only props or nothing.
 //stateless components dont need to extend react.component. It's just a function that returns "html element".
@@ -10,7 +11,7 @@ import Wrapper from '../hoc/Wrapper';
 
 class Header extends React.Component{
 
-    onSignOutUserHandler = (e) => {
+    onSignOutUserHandler = () => {
         this.props.removeCurrentUser();
         this.props.history.push("/");
     };
@@ -34,9 +35,9 @@ class Header extends React.Component{
         }
 
         return (
-            <nav className="navbar navbar-default navLink">
+            <nav className="navbar navbar-default navbar-inverse">
                 <div className="container">
-                    <ul className="nav navbar-nav navbar-right">
+                    <ul className="nav navbar-nav navbar-right ">
                         <li><NavLink to={"/"} activeStyle={{color:'violet'}} >Home</NavLink></li>
                         {navigation}
                     </ul>
@@ -53,4 +54,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {removeCurrentUser})(Header);
+export default withRouter(connect(mapStateToProps, {removeCurrentUser})(Header));

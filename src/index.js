@@ -11,6 +11,8 @@ import Register from './containers/Register';
 import Post from "./containers/Posts/SinglePost";
 import UserPosts from './containers/Users/UserPosts/UserPosts';
 
+import Wrapper from "./hoc/Wrapper";
+
 //to connect react and redux we import Provider
 import { Provider } from 'react-redux';
 import store from './store';
@@ -21,19 +23,19 @@ const newHistory = createBrowserHistory();
 ReactDOM.render(
   <Provider store={store}>
     <Router history={newHistory}>
-        <div>
-            <Header history={newHistory}/>
-          {/* switch: render only one of these routes
+        <Wrapper>
+            <Header/>
+            {/* switch: render only one of these routes
               exact renders only if exact path
             */}
             <Route exact path="/" component={App} />
             <Switch>
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route exact path="/posts/:id" component={Post}  />
-               <Route path="/users/:userId" component={UserPosts}  />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route exact path="/posts/:id" component={Post}  />
+                <Route path="/users/:userId" component={UserPosts}  />
             </Switch>
-        </div>
+        </Wrapper>
     </Router>
   </Provider>,
   window.document.getElementById('root')

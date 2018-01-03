@@ -17,11 +17,7 @@ class UserPosts extends React.Component {
         let heading = null;
 
         if (this.props.fetched) {
-            if(this.props.authUser ) {
-                allPosts = <BlogList posts={ this.props.allPosts } userAuthenticated={this.props.authUser.id === this.props.allPosts[0].userId}/>;
-            } else {
-                allPosts = <BlogList posts={ this.props.allPosts }/>;
-            }
+            allPosts = <BlogList posts={ this.props.allPosts } isHidden={true}/>;
             heading = <h1>{this.props.allPosts[0].author}'s posts</h1>
         }
 
