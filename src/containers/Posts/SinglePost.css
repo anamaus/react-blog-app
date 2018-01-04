@@ -13,3 +13,8 @@
 .Edit textarea {
     min-height: 200px;
 }
+
+
+.WarningMessage {
+    color: red;
+}

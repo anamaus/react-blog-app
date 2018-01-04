@@ -12,6 +12,7 @@ import Post from "./containers/Posts/SinglePost";
 import UserPosts from './containers/Users/UserPosts/UserPosts';
 import PostEdit from './containers/Posts/PostEdit';
 import ForbiddenPage from './components/Utils/Forbidden';
+import NewPost from './containers/Posts/NewPost';
 
 import Wrapper from "./hoc/Wrapper";
 
@@ -41,9 +42,11 @@ ReactDOM.render(
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/forbidden" component={ForbiddenPage}  />
+                <Route path="/users/:userId/new" component={NewPost}  />
                 <Route exact path="/posts/:id/edit" component={PostEdit}  />
                 <Route exact path="/posts/:id" component={Post}  />
                 <Route path="/users/:userId" component={UserPosts}  />
+
             </Switch>
         </Wrapper>
     </Router>

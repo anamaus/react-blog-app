@@ -143,3 +143,44 @@ export const fetchPostEdit = (blogId) => {
             });
     }
 };
+
+export const updatePost = (title, content, id, successCallback) => {
+        Axios.post(apiUrl + "/posts/" +  id, {
+            title: title,
+            content: content,
+        })
+            .then(function (response) {
+                successCallback();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+};
+
+export const createNewPost = (title, content, userId, successCallback) => {
+    Axios.post(apiUrl + "/posts/", {
+        title: title,
+        content: content,
+        userId: userId,
+        })
+        .then(function () {
+            successCallback();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+};
+
+export const deletePost = (id, successCallback) => {
+    Axios.delete(apiUrl + "/posts/" + id)
+        .then(function () {
+            successCallback();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+};
+

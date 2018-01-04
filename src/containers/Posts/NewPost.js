@@ -1,24 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {fetchPostEdit,updatePost} from '../../actions/postActions';
-import {withRouter} from "react-router-dom";
+import {connect} from 'react-redux';
+import {createNewPost} from '../../actions/postActions';
 
-
-class PostEdit extends React.Component {
+class NewPost extends React.Component {
 
     state = {
-        title: this.props.post.title,
-        content: this.props.post.content,
+        title: '',
+        content: '',
         hasError: false,
     };
 
     componentDidMount() {
+        //if the user isn't logged in, redirect to login
         if (!this.props.userAuth) {
             this.props.history.push('/login');
-        } else if (this.props.post.userId !== this.props.userAuth.id ) {
-            this.props.history.push('/forbidden');
-        } else {
-            this.props.fetchPostEdit(this.props.match.params.id)
         }
     }
 
@@ -37,9 +32,9 @@ class PostEdit extends React.Component {
     onSubmitHandler = (e) => {
         e.preventDefault();
         if(this.state.title.length && this.state.content.length) {
-            updatePost(this.state.title,this.state.content, this.props.post.id,
+            createNewPost(this.state.title,this.state.content, this.props.userAuth.id,
                 () => {
-                    this.props.history.push('/posts/' + this.props.post.id)
+                    this.props.history.push('/users/' + this.props.userAuth.id )
                 }
             );
         } else {
@@ -58,8 +53,9 @@ class PostEdit extends React.Component {
         return (
             <div className='Edit col-sm-6 col-sm-offset-3'>
                 <div className="UserPosts-heading">
-                    <h1>Edit your post</h1>
+                    <h1>Create new post</h1>
                 </div>
+
                 <form onSubmit={this.onSubmitHandler}>
                     <div>
                         <label>
@@ -70,7 +66,7 @@ class PostEdit extends React.Component {
                     <div>
                         <label>
                             Content:
-                            <textarea value={this.state.content} onChange={this.onContentChangeHandler}/>
+                            <textarea value={this.state.content} onChange={this.onContentChangeHandler} />
                         </label>
                     </div>
                     <div>
@@ -85,9 +81,8 @@ class PostEdit extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        post: state.postReducer.post,
         userAuth: state.userReducer.currentUser,
     }
 };
 
-export default withRouter(connect(mapStateToProps,  {fetchPostEdit, updatePost})(PostEdit));
+export default connect(mapStateToProps, { createNewPost })(NewPost);

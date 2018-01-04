@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {fetchPost} from '../../actions/postActions';
+import {fetchPost, deletePost} from '../../actions/postActions';
+import {withRouter} from "react-router-dom";
+
 
 import './SinglePost.css';
 
@@ -19,6 +21,11 @@ class Post extends React.Component {
         //     content: this.props.post.content,
         // })
     }
+
+
+    componentWillUnmount(){
+        console.log('unmounted');
+    }
     //
     // componentWillReceiveProps(nextProps) {
     //     // You don't have to do this check first, but it can help prevent an unneeded render
@@ -34,9 +41,16 @@ class Post extends React.Component {
        this.props.history.push(this.props.match.url + '/edit');
     };
 
-    onSubmitHandler = (e) => {
-        e.preventDefault();
-        console.log('submitted!')
+    // onSubmitHandler = (e) => {
+    //     e.preventDefault();
+    //     console.log('submitted!')
+    // };
+
+    onDeleteHandler = () => {
+        deletePost(this.props.post.id,
+            () => {
+                this.props.history.push('/users/' + this.props.authUser.id )
+            });
     };
 
     render() {
@@ -48,7 +62,7 @@ class Post extends React.Component {
             buttons =
                 <div className="buttons pull-right">
                     <button className="btn btn-success" onClick={this.onEditHandler}>Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button className="btn btn-danger" onClick={this.onDeleteHandler}>Delete</button>
                 </div>
         }
 
@@ -106,4 +120,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, { fetchPost })(Post);
+export default withRouter(connect(mapStateToProps, { fetchPost, deletePost })(Post));

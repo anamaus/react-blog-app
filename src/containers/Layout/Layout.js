@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 import BlogList from "../../components/Blog/BlogList";
 
@@ -53,7 +54,7 @@ const mapStateToProps = (state) => {
 // };
 
 //connect connects react with redux, connect this react component to redux store
-export default connect(mapStateToProps, { fetchPosts })(Layout);
+export default withRouter(connect(mapStateToProps, { fetchPosts })(Layout));
 
 //if there is only 1 or 2 actions we dont need mapDispatchToProps:
 // export default connect(mapStateToProps, {setName})(Layout);

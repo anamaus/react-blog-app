@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchAllPostsFromUser} from "../../../actions/postActions";
 import BlogList from "../../../components/Blog/BlogList";
@@ -11,8 +12,6 @@ class UserPosts extends React.Component {
         this.props.fetchAllPostsFromUser(this.props.match.params.userId)
     }
     render() {
-        console.log('posts',this.props.allPosts);
-
         let allPosts=null;
         let heading = null;
 
@@ -24,13 +23,10 @@ class UserPosts extends React.Component {
         if (this.props.fetched && this.props.authUser &&  this.props.authUser.id === this.props.allPosts[0].userId) {
             heading =
                 <Wrapper>
-                    <h1>Hi {this.props.allPosts[0].author} </h1>
-                    <button className="btn btn-primary pull-right">Add new post</button>
+                    <h1>Hi { this.props.authUser.name} </h1>
+                    <Link to={this.props.match.url + '/new'}  className="btn btn-primary pull-right">Add new post</Link>
                </Wrapper>;
         }
-
-
-
 
         return (
             <div className='container'>
