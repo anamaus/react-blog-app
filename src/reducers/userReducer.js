@@ -1,23 +1,24 @@
 const initialState = {
-  users: [],
-  isFetched: false,
   currentUser: null,
-  currentUserFetched: false,
+  currentUserFetched: true,
 };
 
 const UserReducer = (state=initialState, action) => {
   switch(action.type) {
-    case "USERS_SET_CURRENT_USER":
-      return {
-        ...state,
-        currentUser: action.payload,
-        currentUserFetched: true,
-      };
+      case "USERS_SET_CURRENT_USER":
+          return {
+            ...state,
+            currentUser: action.payload,
+          };
+      case "USERS_CURRENT_USER_EXISTS":
+          return {
+              ...state,
+              currentUserFetched: action.payload,
+          };
       case "USERS_REMOVE_CURRENT_USER":
           return {
               ...state,
-              currentUser: action.payload,
-              currentUserFetched: false,
+              state: undefined,
           };
   }
   return state;

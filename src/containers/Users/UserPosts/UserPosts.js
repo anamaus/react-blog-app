@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {fetchAllPostsFromUser} from "../../../actions/postActions";
 import BlogList from "../../../components/Blog/BlogList";
 import Wrapper from '../../../hoc/Wrapper';
+import {withRouter} from "react-router-dom";
+
 
 import './UserPosts.css';
 
@@ -11,6 +13,18 @@ class UserPosts extends React.Component {
     componentDidMount() {
         this.props.fetchAllPostsFromUser(this.props.match.params.userId)
     }
+
+    componentWillReceiveProps(nextprops){
+        if(this.props.authUser && this.props.match.params.userId !== nextprops.match.params.userId) {
+            console.log('nextprops', nextprops.match.params.userId);
+            this.props.fetchAllPostsFromUser(nextprops.match.params.userId);
+        }
+    }
+
+    componentWillUnmount(){
+        console.log('unmounted');
+    }
+
     render() {
         let allPosts=null;
         let heading = null;
@@ -47,4 +61,4 @@ const mapStateToProps =(state) => {
   }
 };
 
-export default connect(mapStateToProps, {fetchAllPostsFromUser}) (UserPosts);
+export default withRouter(connect(mapStateToProps, {fetchAllPostsFromUser}) (UserPosts));

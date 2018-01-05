@@ -1,0 +1,7 @@
+.nav a:hover {
+    cursor: pointer;
+}
+
+.navbar-inverse .navbar-nav>li>a.active {
+    color: mediumpurple;
+}

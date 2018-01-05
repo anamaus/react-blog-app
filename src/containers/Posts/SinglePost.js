@@ -23,9 +23,7 @@ class Post extends React.Component {
     }
 
 
-    componentWillUnmount(){
-        console.log('unmounted');
-    }
+
     //
     // componentWillReceiveProps(nextProps) {
     //     // You don't have to do this check first, but it can help prevent an unneeded render
@@ -68,7 +66,7 @@ class Post extends React.Component {
 
         let singlePost =
             <div className="panel panel-default">
-                <div className="panel-heading">{post.title}</div>
+                <div className="panel-heading"><h2>{post.title}</h2></div>
                 <div className="panel-body">
                     <div className="panel-content">{post.content}</div>
                 </div>

@@ -95,6 +95,13 @@ export const getAllPostFromUserSuccess = (posts) => {
         payload: posts,
     }
 };
+export const getAllPostFromUserEmpty = (posts) => {
+    return {
+        type: 'POST_GET_ALL_POSTS_FROM_USER_EMPTY',
+        payload: posts,
+    }
+};
+
 
 export const fetchAllPostsFromUser = (userId) => {
     return (dispatch) => {
@@ -117,6 +124,7 @@ export const fetchAllPostsFromUser = (userId) => {
                         })
                         .then(allPosts => {
                             dispatch(getAllPostFromUserSuccess(allPosts));
+                            console.log(allPosts);
                         })
                         .catch(function (error) {
                             console.log(error);

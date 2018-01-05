@@ -14,7 +14,7 @@ class Layout extends React.Component {
     }
 
     render() {
-        // console.log('from Layout.js', JSON.stringify (this.props.blogs, null, 2));
+        // console.log('from Layout.js', JSON.stringify (this.props.posts, null, 2));
 
         const  { posts } = this.props;
 

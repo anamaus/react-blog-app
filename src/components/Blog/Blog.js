@@ -8,7 +8,7 @@ const blog = (props) => {
 
   return (
       <div className="panel panel-default">
-          <div className="panel-heading">{props.title}</div>
+          <div className="panel-heading"><h2>{props.title}</h2></div>
           <div className="panel-body">
               <div className="panel-content">{props.content.length < 50 ? props.content : props.content.substr(0,50) + "..."}</div>
               <Link to={"/posts/"+props.id} className="btn btn-success">Read more</Link>

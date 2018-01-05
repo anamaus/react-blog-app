@@ -32,7 +32,7 @@ class NewPost extends React.Component {
     onSubmitHandler = (e) => {
         e.preventDefault();
         if(this.state.title.length && this.state.content.length) {
-            createNewPost(this.state.title,this.state.content, this.props.userAuth.id,
+           createNewPost(this.state.title,this.state.content, this.props.userAuth.id,
                 () => {
                     this.props.history.push('/users/' + this.props.userAuth.id )
                 }

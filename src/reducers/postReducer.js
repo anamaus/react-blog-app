@@ -33,6 +33,11 @@ const PostReducer = (state=initialState, action) => {
               allPostsFromUser: action.payload,
               allPostsFromUserFetched: true,
           };
+      // case "POST_GET_ALL_POSTS_FROM_USER_EMPTY":
+      //     return {
+      //         ...state,
+      //         allPostsFromUserFetched: false,
+      //     };
   }
   return state;
 };

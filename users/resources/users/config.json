@@ -16,6 +16,14 @@
 			"required": true,
 			"id": "password",
 			"order": 1
+		},
+		"username": {
+			"name": "username",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "username",
+			"order": 2
 		}
 	}
 }

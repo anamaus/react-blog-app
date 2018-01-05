@@ -5,7 +5,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import './styles/scss/style.css';
 
 import App from './App';
-import Header  from './components/Header';
+import Header  from './components/UI/Header/Header';
 import Login from './containers/Login';
 import Register from './containers/Register';
 import Post from "./containers/Posts/SinglePost";
@@ -37,15 +37,16 @@ ReactDOM.render(
             {/* switch: render only one of these routes
               exact renders only if exact path
             */}
-            <Route exact path="/" component={App} />
+
             <Switch>
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
-                <Route path="/forbidden" component={ForbiddenPage}  />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact  path="/forbidden" component={ForbiddenPage}  />
                 <Route path="/users/:userId/new" component={NewPost}  />
                 <Route exact path="/posts/:id/edit" component={PostEdit}  />
                 <Route exact path="/posts/:id" component={Post}  />
                 <Route path="/users/:userId" component={UserPosts}  />
+                <Route exact path="/" component={App} />
 
             </Switch>
         </Wrapper>
