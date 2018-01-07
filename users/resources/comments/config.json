@@ -1,0 +1,29 @@
+{
+	"type": "Collection",
+	"properties": {
+		"content": {
+			"name": "content",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "content",
+			"order": 0
+		},
+		"userId": {
+			"name": "userId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "userId",
+			"order": 1
+		},
+		"postId": {
+			"name": "postId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "postId",
+			"order": 2
+		}
+	}
+}

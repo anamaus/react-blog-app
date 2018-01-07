@@ -8,11 +8,11 @@ import App from './App';
 import Header  from './components/UI/Header/Header';
 import Login from './containers/Login';
 import Register from './containers/Register';
-import Post from "./containers/Posts/SinglePost";
+import Post from "./containers/Posts/SinglePost/SinglePost";
 import UserPosts from './containers/Users/UserPosts/UserPosts';
-import PostEdit from './containers/Posts/PostEdit';
+import PostEdit from './containers/Posts/EditPost/EditPost';
 import ForbiddenPage from './components/Utils/Forbidden';
-import NewPost from './containers/Posts/NewPost';
+import NewPost from './containers/Posts/NewPost/NewPost';
 
 import Wrapper from "./hoc/Wrapper";
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {createNewPost} from '../../actions/postActions';
+import {createNewPost} from '../../../actions/postActions';
 
 class NewPost extends React.Component {
 

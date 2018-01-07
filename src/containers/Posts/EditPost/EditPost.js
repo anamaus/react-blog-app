@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {fetchPostEdit,updatePost} from '../../actions/postActions';
+import {fetchPostEdit,updatePost} from '../../../actions/postActions';
 import {withRouter} from "react-router-dom";
 
 
