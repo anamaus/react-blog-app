@@ -1,10 +1,11 @@
 const initialState = {
-  posts: [],
-  postsFetched: false,
-  post: {},
-  isPostFetched: false,
-  allPostsFromUser: [],
-  allPostsFromUserFetched: false,
+    posts: [],
+    postsFetched: false,
+    post: {},
+    isPostFetched: false,
+    allPostsFromUser: [],
+    allPostsFromUserFetched: false,
+    allPostsFromUserEmpty: false
 };
 
 const PostReducer = (state=initialState, action) => {
@@ -33,11 +34,11 @@ const PostReducer = (state=initialState, action) => {
               allPostsFromUser: action.payload,
               allPostsFromUserFetched: true,
           };
-      // case "POST_GET_ALL_POSTS_FROM_USER_EMPTY":
-      //     return {
-      //         ...state,
-      //         allPostsFromUserFetched: false,
-      //     };
+      case "POST_GET_ALL_POSTS_FROM_USER_EMPTY":
+          return {
+              ...state,
+              allPostsFromUserEmpty: action.payload,
+          };
   }
   return state;
 };

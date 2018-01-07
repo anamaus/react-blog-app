@@ -95,17 +95,18 @@ export const getAllPostFromUserSuccess = (posts) => {
         payload: posts,
     }
 };
-export const getAllPostFromUserEmpty = (posts) => {
+export const getAllPostFromUserEmpty = (bool) => {
     return {
         type: 'POST_GET_ALL_POSTS_FROM_USER_EMPTY',
-        payload: posts,
+        payload: bool,
     }
 };
 
 
 export const fetchAllPostsFromUser = (userId) => {
+    let allPosts=[];
     return (dispatch) => {
-        let allPosts=[];
+
         Axios.get(apiUrl+ "/posts")
             .then (result => {
                 for (let i =0; i < result.data.length; i++){
@@ -116,20 +117,25 @@ export const fetchAllPostsFromUser = (userId) => {
                 return allPosts;
             })
             .then(function(allPosts){
-                allPosts.map(post => {
-                    Axios.get(apiUrl+"/users/" + post.userId)
-                        .then( result => {
-                            post.author = result.data.name;
-                            return Axios.all(allPosts)
-                        })
-                        .then(allPosts => {
-                            dispatch(getAllPostFromUserSuccess(allPosts));
-                            console.log(allPosts);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                })
+                if(!allPosts.length) {
+                    dispatch(getAllPostFromUserEmpty(true));
+                    dispatch(getAllPostFromUserSuccess(undefined));
+                } else {
+                    allPosts.map(post => {
+                        Axios.get(apiUrl+"/users/" + post.userId)
+                            .then( result => {
+                                post.author = result.data.name;
+                                return Axios.all(allPosts)
+                            })
+                            .then(allPosts => {
+                                dispatch(getAllPostFromUserSuccess(allPosts));
+                                dispatch(getAllPostFromUserEmpty(false));
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    })
+                }
             })
             .catch(function (error) {
                 console.log(error);

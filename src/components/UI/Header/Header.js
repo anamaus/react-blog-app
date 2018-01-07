@@ -14,8 +14,6 @@ import './Header.css';
 class Header extends React.Component{
 
     onSignOutUserHandler = () => {
-
-
         this.props.signOutHandler();
         // this.props.history.push("/");
     };

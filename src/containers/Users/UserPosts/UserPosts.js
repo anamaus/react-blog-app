@@ -15,9 +15,8 @@ class UserPosts extends React.Component {
     }
 
     componentWillReceiveProps(nextprops){
-        if(this.props.authUser && this.props.match.params.userId !== nextprops.match.params.userId) {
-            console.log('nextprops', nextprops.match.params.userId);
-            this.props.fetchAllPostsFromUser(nextprops.match.params.userId);
+        if(this.props.authUser && (this.props.match.params.userId !== nextprops.match.params.userId)) {
+            this.props.fetchAllPostsFromUser(nextprops.match.params.userId)
         }
     }
 
@@ -26,15 +25,17 @@ class UserPosts extends React.Component {
     }
 
     render() {
+        console.log(this.props);
+
         let allPosts=null;
         let heading = null;
 
-        if (this.props.fetched) {
+        if (this.props.fetched && !this.props.noPosts) {
             allPosts = <BlogList posts={ this.props.allPosts } isHidden={true}/>;
             heading = <h1>{this.props.allPosts[0].author}'s posts</h1>
         }
 
-        if (this.props.fetched && this.props.authUser &&  this.props.authUser.id === this.props.allPosts[0].userId) {
+        if (this.props.fetched && this.props.authUser &&  this.props.authUser.id === this.props.match.params.userId) {
             heading =
                 <Wrapper>
                     <h1>Hi { this.props.authUser.name} </h1>
@@ -49,7 +50,6 @@ class UserPosts extends React.Component {
                 </div>
                 {allPosts}
             </div>
-
         )
     }
 }
@@ -58,6 +58,7 @@ const mapStateToProps =(state) => {
       allPosts: state.postReducer.allPostsFromUser,
       fetched: state.postReducer.allPostsFromUserFetched,
       authUser: state.userReducer.currentUser,
+      noPosts: state.postReducer.allPostsFromUserEmpty
   }
 };
 
