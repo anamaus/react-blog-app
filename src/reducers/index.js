@@ -3,11 +3,13 @@ import {combineReducers} from "redux";
 //import reducers
 import userReducer from "./userReducer";
 import postReducer from "./postReducer";
+import commentsReducer from "./commentsReducer";
 
 
 const appReducer = combineReducers({
     userReducer,
-    postReducer
+    postReducer,
+    commentsReducer,
 });
 
 const rootReducer = ( state, action ) => {

@@ -38,8 +38,8 @@ class UserPosts extends React.Component {
         if (this.props.fetched && this.props.authUser &&  this.props.authUser.id === this.props.match.params.userId) {
             heading =
                 <Wrapper>
-                    <h1>Hi { this.props.authUser.name} </h1>
-                    <Link to={this.props.match.url + '/new'}  className="btn btn-primary pull-right">Add new post</Link>
+                    <h1>Hi, { this.props.authUser.name} </h1>
+                    <Link to={this.props.match.url + '/new-post'}  className="btn btn-primary pull-right">Add new post</Link>
                </Wrapper>;
         }
 

@@ -1,12 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import {fetchPost, deletePost} from '../../../actions/postActions';
+import {fetchComments} from '../../../actions/commentsActions';
 import {withRouter} from "react-router-dom";
 
+import CommentList from '../../../components/Comments/CommentList';
 
 import './SinglePost.css';
 
 class Post extends React.Component {
+
+    /*
+    * Commented out sections are a version of editing post with state.
+    * The working version is the one without state, using redux.
+    * */
 
     // state = {
     //     editMode: false,
@@ -16,6 +24,7 @@ class Post extends React.Component {
 
     componentDidMount(){
         this.props.fetchPost(this.props.match.params.id);
+        this.props.fetchComments(this.props.match.params.id);
         // this.setState({
         //     title: this.props.post.title,
         //     content: this.props.post.content,
@@ -39,11 +48,6 @@ class Post extends React.Component {
        this.props.history.push(this.props.match.url + '/edit');
     };
 
-    // onSubmitHandler = (e) => {
-    //     e.preventDefault();
-    //     console.log('submitted!')
-    // };
-
     onDeleteHandler = () => {
         deletePost(this.props.post.id,
             () => {
@@ -52,6 +56,7 @@ class Post extends React.Component {
     };
 
     render() {
+        console.log(this.props.comments)
         const {post} = this.props;
 
         let buttons = null;
@@ -99,12 +104,41 @@ class Post extends React.Component {
         //         </div>
         // }
 
+        let commentList = <div className="well">
+            There are no comments for this post.
+        </div>;
+
+        if(this.props.commentsFetched) {
+           commentList = <CommentList  comments={this.props.comments} authUser={this.props.authUser}/>;
+        }
+
+        let commentControls = null;
+
+        if(this.props.authUser) {
+            commentControls =
+                <div className="buttons">
+                    <Link to={this.props.match.url + '/new-comment'} className="btn btn-success">Add comment</Link>
+                </div>
+        }
+
+
         return (
             <div className="container">
                 <div className="UserPosts-heading">
                    <h1>{post.author}</h1>
                 </div>
                 {singlePost}
+
+
+                <hr/>
+
+                <div className="well">
+                    <h3>Comments</h3>
+                </div>
+                {commentControls}
+
+                {commentList}
+
             </div>
         )
     }
@@ -115,7 +149,10 @@ const mapStateToProps = (state) => {
     return {
         post: state.postReducer.post,
         authUser: state.userReducer.currentUser,
+        comments: state.commentsReducer.comments,
+        commentsFetched: state.commentsReducer.commentsFetched,
+
     }
 };
 
-export default withRouter(connect(mapStateToProps, { fetchPost, deletePost })(Post));
+export default withRouter(connect(mapStateToProps, { fetchPost, deletePost, fetchComments })(Post));

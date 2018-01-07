@@ -104,17 +104,10 @@ export const getAllPostFromUserEmpty = (bool) => {
 
 
 export const fetchAllPostsFromUser = (userId) => {
-    let allPosts=[];
     return (dispatch) => {
-
-        Axios.get(apiUrl+ "/posts")
+        Axios.get(apiUrl+ "/posts?userId=" + userId)
             .then (result => {
-                for (let i =0; i < result.data.length; i++){
-                    if(result.data[i].userId === userId) {
-                        allPosts.push(result.data[i]);
-                    }
-                }
-                return allPosts;
+                return result.data;
             })
             .then(function(allPosts){
                 if(!allPosts.length) {

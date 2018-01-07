@@ -13,6 +13,7 @@ import UserPosts from './containers/Users/UserPosts/UserPosts';
 import PostEdit from './containers/Posts/EditPost/EditPost';
 import ForbiddenPage from './components/Utils/Forbidden';
 import NewPost from './containers/Posts/NewPost/NewPost';
+import NewComment from  './components/Comments/NewComment/NewComment';
 
 import Wrapper from "./hoc/Wrapper";
 
@@ -42,7 +43,8 @@ ReactDOM.render(
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact  path="/forbidden" component={ForbiddenPage}  />
-                <Route path="/users/:userId/new" component={NewPost}  />
+                <Route path="/users/:userId/new-post" component={NewPost}  />
+                <Route path="/posts/:postId/new-comment" component={NewComment}  />
                 <Route exact path="/posts/:id/edit" component={PostEdit}  />
                 <Route exact path="/posts/:id" component={Post}  />
                 <Route path="/users/:userId" component={UserPosts}  />
