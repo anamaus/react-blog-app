@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {addNewComment} from '../../../actions/commentsActions';
 import {withRouter} from 'react-router-dom';
 
+import classes from './NewComment.css';
 
 class NewComment extends React.Component {
     state = {
@@ -23,33 +24,14 @@ class NewComment extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={classes.NewComment}>
                 <form onSubmit={this.onSubmitHandler}>
                     <div>
-                        <label>
-                            <textarea value={this.state.content} onChange={(event) => this.setState({content: event.target.value})}  />
-                        </label>
+                        <textarea value={this.state.content} onChange={(event) => this.setState({content: event.target.value})}  />
                     </div>
-                        <input type="submit" value="Add comment" />
+                        <input type="submit" value="Add comment" className={classes.Button} />
                 </form>
             </div>
-            /*<div className='Edit col-sm-6 col-sm-offset-3'>
-                <div className="UserPosts-heading">
-                    <h1>Create new comment</h1>
-                </div>
-
-                <form onSubmit={this.onSubmitHandler}>
-                    <div>
-                        <label>
-                            Content:
-                            <textarea value={this.state.content} onChange={(event) => this.setState({content: event.target.value})}  />
-                        </label>
-                    </div>
-                    <div>
-                        <input type="submit" value="Submit" />
-                    </div>
-                </form>
-            </div>*/
         )
     }
 }

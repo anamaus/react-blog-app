@@ -45,8 +45,9 @@ const PostReducer = (state=initialState, action) => {
       //         ...state,
       //         // posts: state.posts.filter(post => post.id !== postId)
       //     };
+      default : return state;
   }
-  return state;
+
 };
 
 export default PostReducer;

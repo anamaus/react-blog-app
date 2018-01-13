@@ -20,8 +20,10 @@ const UserReducer = (state=initialState, action) => {
               ...state,
               state: undefined,
           };
+
+      default : return state;
   }
-  return state;
+
 };
 
 export default UserReducer;

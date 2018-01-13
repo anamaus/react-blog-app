@@ -15,8 +15,11 @@ import './Header.css';
 class Header extends React.Component{
 
     onSignOutUserHandler = () => {
-        this.props.signOutHandler();
-        // this.props.history.push("/");
+        this.props.signOutHandler(
+        () => {
+             this.props.history.push("/");
+        })
+
     };
 
     render(){
@@ -26,7 +29,7 @@ class Header extends React.Component{
             navigation =
                 <Wrapper>
                     <li><NavLink to={"/users/" + this.props.authUser.id} >{this.props.authUser.name}</NavLink></li>
-                    <li><a onClick={this.onSignOutUserHandler}>Sign out</a></li>
+                    <li><a onClick={this.onSignOutUserHandler} style={{cursor: 'pointer'}}>Sign out</a></li>
                 </Wrapper>
 
         } else {

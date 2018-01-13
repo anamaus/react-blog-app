@@ -16,5 +16,10 @@ a {
 }
 
 a:hover {
+    color: mediumpurple;
     text-decoration: none;
+}
+
+.Highlighted {
+    color: mediumpurple;
 }

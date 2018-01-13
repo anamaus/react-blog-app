@@ -27,7 +27,7 @@ export const fetchComments = (postId) => {
             .then(function(comments) {
                 if (comments.length) {
                     comments.map(comment => {
-                        Axios.get(apiUrl + "/users/" + comment.userId)
+                       return  Axios.get(apiUrl + "/users/" + comment.userId)
                             .then(result => {
                                 comment.author = result.data.name;
                                 return Axios.all(comments)
@@ -41,6 +41,7 @@ export const fetchComments = (postId) => {
                             });
                     })
                 } else {
+                    dispatch(fetchCommentsSuccess([])) ;
                     dispatch(commentsFetched(false)) ;
                 }
             })
@@ -66,10 +67,22 @@ export const addNewComment = (postId, userId, content, successCallback) => {
             content: content
         })
             .then(function (response) {
-                console.log(response);
-                dispatch(addComment(response.data));
-                dispatch(commentsFetched(true)) ;
-                successCallback();
+                let newComment = response.data;
+                Axios.get(apiUrl + "/users/" + newComment.userId)
+                    .then(result => {
+                        newComment.author = result.data.name;
+                        return newComment;
+                    })
+                    .then(newComment => {
+                        console.log(response);
+                        dispatch(addComment(newComment));
+                        dispatch(commentsFetched(true)) ;
+                        successCallback();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
             })
             .catch(function (error) {
                 console.log(error);

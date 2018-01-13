@@ -85,10 +85,12 @@ export const resetState = () => {
     }
 };
 
-export const signOutHandler = () => {
+export const signOutHandler = (successCallback) => {
     return (dispatch) => {
         dispatch(resetState());
+
         window.localStorage.clear();
+        successCallback();
     }
 };
 

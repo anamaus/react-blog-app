@@ -151,11 +151,10 @@ export const fetchPostEdit = (blogId) => {
     }
 };
 
-export const updatePost = (title, content, category, id, successCallback) => {
+export const updatePost = (title, content,  id, successCallback) => {
         Axios.post(apiUrl + "/posts/" +  id, {
             title: title,
             content: content,
-            category: category
         })
             .then(function (response) {
                 successCallback();

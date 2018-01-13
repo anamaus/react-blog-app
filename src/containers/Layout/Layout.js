@@ -14,6 +14,9 @@ class Layout extends React.Component {
     componentDidMount(){
         this.props.fetchPosts();
     }
+    componentWillReceiveProps(nextprops) {
+        console.log(nextprops);
+    }
 
     render() {
         // console.log('from Layout.js', JSON.stringify (this.props.posts, null, 2));

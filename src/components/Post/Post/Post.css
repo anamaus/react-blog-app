@@ -32,6 +32,8 @@
 
 .Content {
     margin-bottom: 20px;
+
+    min-height: 70px;
 }
 
 .Button {

@@ -14,29 +14,34 @@ class UserPosts extends React.Component {
         this.props.fetchAllPostsFromUser(this.props.match.params.userId)
     }
 
+    //fecth posts from user if coming from another user preview
     componentWillReceiveProps(nextprops){
         if(this.props.authUser && (this.props.match.params.userId !== nextprops.match.params.userId)) {
             this.props.fetchAllPostsFromUser(nextprops.match.params.userId)
         }
     }
 
-
     render() {
-        console.log(this.props);
-
         let allPosts=null;
         let heading = null;
+
+        if (this.props.noPosts) {
+            allPosts = <h3 className={classes.NoPosts}>You don't have any posts.</h3>
+        }
 
         if (this.props.fetched && !this.props.noPosts) {
             allPosts = <BlogList posts={ this.props.allPosts } isHidden={true}/>;
             heading = <h1>{this.props.allPosts[0].author}'s posts</h1>
         }
 
+
+
         if (this.props.fetched && this.props.authUser &&  this.props.authUser.id === this.props.match.params.userId) {
             heading =
                 <Wrapper>
-                    <h1>Hi, { this.props.authUser.name} </h1>
-                    <Link to={this.props.match.url + '/new-post'}  className="btn btn-primary pull-right">Add new post</Link>
+                    <h1>Hi, { this.props.authUser.name}   </h1>
+                    <Link to={this.props.match.url + '/new-post'}  className={classes.Button}>Add new post</Link>
+                    <hr style={{borderTopColor: '#fff'}}/>
                </Wrapper>;
         }
 
@@ -45,6 +50,7 @@ class UserPosts extends React.Component {
                 <div className={classes.UserPostsHeading}>
                     {heading}
                 </div>
+
                 {allPosts}
             </div>
         )

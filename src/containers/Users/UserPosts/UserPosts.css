@@ -1,13 +1,33 @@
 .UserPostsHeading  {
     position: relative;
 
-    margin-bottom: 50px;
+    text-align: center;
+
+    width: 60%;
+
+    padding: 30px;
+    margin: 50px auto;
+
+    background-color: #fff;
+    box-shadow: 0 1px #ffffff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 }
 
-.UserPosts-heading button {
-    position: absolute;
-    top: 50%;
-    right: 0;
+.UserPosts-heading hr {
+    border-top-color: mediumpurple ;
+}
 
-    transform: translateY(-50%);
+.Button {
+    background-color: mediumpurple;
+    color: #fff;
+    display: inline-block;
+
+    padding: 8px 16px;
+    margin-top: 20px;
+    font-size: 16px;
+
+    box-shadow: 0 1px mediumpurple inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.NoPosts{
+    text-align: center;
 }

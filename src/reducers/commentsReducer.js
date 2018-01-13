@@ -42,9 +42,9 @@ const CommentsReducer = (state=initialState, action) => {
                         ...editedComment
                     };
                 })
-            }
+            };
+        default : return state;
     }
-    return state;
 };
 
 

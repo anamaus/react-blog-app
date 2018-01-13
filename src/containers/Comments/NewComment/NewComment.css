@@ -1,0 +1,19 @@
+.NewComment {
+    padding: 10px;
+    background-color: mediumpurple;
+    color: #fff;
+}
+
+.NewComment textarea {
+    width: 100%;
+    color: gray;
+}
+
+.Button {
+    margin-top: 10px;
+    color: mediumpurple;
+    font-weight: bold;
+
+    background-color: #fff;
+    border: 0;
+}

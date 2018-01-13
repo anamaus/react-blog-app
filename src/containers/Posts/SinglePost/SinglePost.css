@@ -9,6 +9,7 @@
 
     margin: 100px auto 0;
     background-color: #fff;
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
 }
 
 .SinglePost h1 {
@@ -25,4 +26,22 @@
 
 .Content {
     padding-bottom: 50px;
+}
+
+.Comments {
+    padding-bottom: 100px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.Buttons {
+    padding-top: 10px;
+    border-top: 1px solid #dedede;
+}
+.Button {
+    color: mediumpurple;
+    font-weight: bold;
+
+    background-color: transparent;
+    border: 0;
 }

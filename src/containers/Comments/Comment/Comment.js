@@ -4,6 +4,7 @@ import {fetchComments, deleteComment, updateComment} from "../../../actions/comm
 import classes from './Comment.css';
 // You can get access to the history object's properties and the closest <Route>'s match
 import {withRouter} from "react-router-dom";
+import "../../../index.css";
 
 
 class Comment extends React.Component {
@@ -25,28 +26,36 @@ class Comment extends React.Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        this.props.updateComment(this.props.id, this.state.content,
-            () =>{
-                this.setState({
-                    editMode: false
+        if(this.state.content.length) {
+            this.props.updateComment(this.props.id, this.state.content,
+                () =>{
+                    this.setState({
+                        editMode: false
+                    })
                 })
+        } else {
+            this.setState({
+                hasErrored: true,
             })
+        }
+
     };
 
     toggleEditMode = () => {
         this.setState({
             content: this.props.content,
-            editMode: true
+            editMode: true,
+            hasErrored: false,
         })
     };
 
     render() {
         let commentControls = null;
-        if (this.props.authUser && this.props.authUser.id === this.props.userId) {
+        if (this.props.authUser && this.props.authUser.id === this.props.userId && !this.state.editMode) {
             commentControls =
-                <div className="buttons pull-right">
-                    <button className="btn btn-success"  onClick={this.toggleEditMode}>Edit</button>
-                    <button className="btn btn-danger" onClick={this.onDeleteCommentHandler}>Delete</button>
+                <div className={classes.Buttons}>
+                    <button className={classes.Button}  onClick={this.toggleEditMode}>Edit</button>
+                    <button className={classes.Button} onClick={this.onDeleteCommentHandler}>Delete</button>
                 </div>
         }
 
@@ -54,17 +63,16 @@ class Comment extends React.Component {
 
         if(this.state.editMode) {
                 content =
-                    <div>
+                    <div className={classes.EditComment}>
                         <form onSubmit={this.onSubmitHandler}>
                         <div>
-                            <label>
-                                <textarea value={this.state.content} onChange={this.onContentChangeHandler}/>
-                            </label>
+                            <textarea value={this.state.content} onChange={this.onContentChangeHandler}/>
                         </div>
                         <div>
-                            <input type="submit" value="Submit" />
+                            <input type="submit" value="Submit" className={classes.Button} />
                         </div>
                     </form>
+                        <div className={classes.WarningMessage} style={{ display: this.state.hasErrored ? 'block' : 'none' }}>Please enter your comment</div>
                 </div>
         } else {
             content = <div>{this.props.content}</div>;
@@ -72,14 +80,15 @@ class Comment extends React.Component {
 
 
         return (
-            <div className="panel panel-default">
+            <div className={classes.Comment}>
+                 <p style={{ color:  this.props.authUser && this.props.userId === this.props.authUser.id ? 'mediumpurple': null}}>
+                     {this.props.author}:
+                </p>
                 <div className="panel-body">
                     {content}
                 </div>
-                <div className="panel-footer">
-                    by <span className={this.props.commentFromCurrentUser ? 'Highlighted' : null}>
-                     {this.props.author}
-                </span>
+
+                <div className="">
                     {commentControls}
                 </div>
             </div>

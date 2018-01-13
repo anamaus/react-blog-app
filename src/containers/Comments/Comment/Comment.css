@@ -1,6 +1,38 @@
-.Highlighted {
-    display: inline-block;
 
+
+.Comment{
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dedede;
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.Comment p {
     font-weight: bold;
+}
+
+.EditComment textarea {
+    width: 100%;
+}
+
+.Buttons {
+    padding-top: 10px;
+    border-top: 1px solid #dedede;
+}
+.Button {
     color: mediumpurple;
+    font-weight: bold;
+
+    background-color: transparent;
+    border: 0;
+}
+
+.Button:first-of-type {
+    margin-right: 10px;
+}
+
+.WarningMessage {
+    margin-top: 10px;
+    color: red;
 }
