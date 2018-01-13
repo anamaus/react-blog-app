@@ -151,10 +151,11 @@ export const fetchPostEdit = (blogId) => {
     }
 };
 
-export const updatePost = (title, content, id, successCallback) => {
+export const updatePost = (title, content, category, id, successCallback) => {
         Axios.post(apiUrl + "/posts/" +  id, {
             title: title,
             content: content,
+            category: category
         })
             .then(function (response) {
                 successCallback();
@@ -165,13 +166,15 @@ export const updatePost = (title, content, id, successCallback) => {
 
 };
 
-export const createNewPost = (title, content, userId, successCallback) => {
+export const createNewPost = (title, content, category, userId, successCallback) => {
     Axios.post(apiUrl + "/posts/", {
         title: title,
         content: content,
         userId: userId,
+        category: category
         })
-        .then(function () {
+        .then(function (response) {
+            console.log(response.data);
             successCallback();
         })
         .catch(function (error) {
@@ -180,14 +183,24 @@ export const createNewPost = (title, content, userId, successCallback) => {
 
 };
 
-export const deletePost = (id, successCallback) => {
-    Axios.delete(apiUrl + "/posts/" + id)
-        .then(function () {
-            successCallback();
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+export const deleteSinglePost = (id) => {
+    return {
+        type: 'POST_POST_DELETED',
+        payload: id,
+    }
+};
 
+export const deletePost = (id, successCallback) => {
+    return (dispatch) => {
+
+        Axios.delete(apiUrl + "/posts/" + id)
+            .then(function () {
+                dispatch(deleteSinglePost(id));
+                successCallback();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 };
 

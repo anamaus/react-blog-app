@@ -39,6 +39,12 @@ const PostReducer = (state=initialState, action) => {
               ...state,
               allPostsFromUserEmpty: action.payload,
           };
+      // case "POST_POST_DELETED":
+      //     const postId = action.payload;
+      //     return {
+      //         ...state,
+      //         // posts: state.posts.filter(post => post.id !== postId)
+      //     };
   }
   return state;
 };

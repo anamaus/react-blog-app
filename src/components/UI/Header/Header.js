@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import {connect} from 'react-redux';
 import {signOutHandler} from "../../../actions/userActions";
 import Wrapper from '../../../hoc/Wrapper';
+// You can get access to the history object's properties and the closest <Route>'s match
 import {withRouter} from "react-router-dom";
 
 import './Header.css';
@@ -37,7 +38,7 @@ class Header extends React.Component{
         }
 
         return (
-            <nav className="navbar navbar-default navbar-inverse">
+            <nav className="navbar navbar-default" style={{marginBottom: 0}}>
                 <div className="container">
                     <ul className="nav navbar-nav navbar-right ">
                         <li><NavLink to={"/"} exact  >Home</NavLink></li>

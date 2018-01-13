@@ -51,28 +51,71 @@ export const fetchComments = (postId) => {
     }
 };
 
-export const addNewComment = (postId, userId, content, successCallback) => {
-    Axios.post(apiUrl+"/comments",{
-        postId:postId,
-        userId:userId,
-        content: content
-    })
-        .then(function (response) {
-            console.log(response);
-            successCallback();
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+export const addComment = (comment) => {
+    return {
+        type: 'COMMENT_ADDED',
+        payload: comment,
+    }
 };
 
-export const deleteComment = (commentId, successCallback) => {
-    Axios.delete(apiUrl+"/comments/" + commentId )
-        .then(function (response) {
-            console.log(response);
-            successCallback();
+export const addNewComment = (postId, userId, content, successCallback) => {
+    return (dispatch) => {
+        Axios.post(apiUrl + "/comments", {
+            postId: postId,
+            userId: userId,
+            content: content
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then(function (response) {
+                console.log(response);
+                dispatch(addComment(response.data));
+                dispatch(commentsFetched(true)) ;
+                successCallback();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+};
+
+export const deleteSingleComment = (id) => {
+    return {
+        type: 'COMMENT_DELETED',
+        payload: id,
+    }
+};
+export const deleteComment = (commentId) => {
+    return (dispatch) => {
+
+        Axios.delete(apiUrl + "/comments/" + commentId)
+            .then(function (response) {
+                dispatch(deleteSingleComment(commentId));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+};
+
+export const updateSingleComment= (comment) => {
+    return {
+        type: 'COMMENT_UPDATED',
+        payload: comment,
+    }
+};
+
+export const updateComment = (commentId, content, successCallback) => {
+    return (dispatch) => {
+
+        Axios.post(apiUrl + "/comments/" + commentId,
+            {
+                content: content
+            })
+            .then(function (response) {
+                dispatch(updateSingleComment(response.data));
+                successCallback();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 };

@@ -6,57 +6,30 @@ import {fetchComments} from '../../../actions/commentsActions';
 import {withRouter} from "react-router-dom";
 
 import CommentList from '../../../components/Comments/CommentList';
+import NewComment from '../../Comments/NewComment/NewComment';
 
-import './SinglePost.css';
+import classes from './SinglePost.css';
+
 
 class Post extends React.Component {
-
-    /*
-    * Commented out sections are a version of editing post with state.
-    * The working version is the one without state, using redux.
-    * */
-
-    // state = {
-    //     editMode: false,
-    //     title: '',
-    //     content: '',
-    // };
 
     componentDidMount(){
         this.props.fetchPost(this.props.match.params.id);
         this.props.fetchComments(this.props.match.params.id);
-        // this.setState({
-        //     title: this.props.post.title,
-        //     content: this.props.post.content,
-        // })
     }
-
-
-
-    //
-    // componentWillReceiveProps(nextProps) {
-    //     // You don't have to do this check first, but it can help prevent an unneeded render
-    //     if (nextProps.post.title !== this.state.title) {
-    //         this.setState({
-    //             title: nextProps.post.title,
-    //             content: nextProps.post.content,
-    //         });
-    //     }
-    // }
 
     onEditHandler = () => {
        this.props.history.push(this.props.match.url + '/edit');
     };
 
     onDeleteHandler = () => {
-        deletePost(this.props.post.id,
+        this.props.deletePost(this.props.post.id,
             () => {
                 this.props.history.push('/users/' + this.props.authUser.id )
             });
     };
 
     render() {
-        console.log(this.props.comments)
         const {post} = this.props;
 
         let buttons = null;
@@ -70,75 +43,47 @@ class Post extends React.Component {
         }
 
         let singlePost =
-            <div className="panel panel-default">
-                <div className="panel-heading"><h2>{post.title}</h2></div>
-                <div className="panel-body">
-                    <div className="panel-content">{post.content}</div>
-                </div>
+            <div className={classes.SinglePost}>
+              <h1>{post.title}</h1>
+                <p>by <span>{post.author}</span>, date</p>
+                <div className={classes.Content}>{post.content}</div>
+
                 <div className="panel-footer clearfix">
-                    date
                     {buttons}
                 </div>
             </div>;
 
-        // if (this.state.editMode) {
-        //    singlePost =
-        //         <div className='Edit col-sm-6 col-sm-offset-3'>
-        //             <form onSubmit={this.onSubmitHandler}>
-        //                 <div>
-        //                     <label>
-        //                         Title:
-        //                         <input type="text" value={this.state.title} />
-        //                     </label>
-        //                 </div>
-        //                 <div>
-        //                     <label>
-        //                         Content:
-        //                         <textarea value={this.state.content} />
-        //                     </label>
-        //                 </div>
-        //                 <div>
-        //                     <input type="submit" value="Submit" />
-        //                 </div>
-        //             </form>
-        //         </div>
-        // }
-
-        let commentList = <div className="well">
-            There are no comments for this post.
-        </div>;
+        let commentList =
+            <div className="well">
+                There are no comments for this post.
+            </div>;
 
         if(this.props.commentsFetched) {
-           commentList = <CommentList  comments={this.props.comments} authUser={this.props.authUser}/>;
+           commentList = <CommentList  comments={this.props.comments} />;
         }
 
         let commentControls = null;
+        let newComment = null;
 
         if(this.props.authUser) {
-            commentControls =
-                <div className="buttons">
-                    <Link to={this.props.match.url + '/new-comment'} className="btn btn-success">Add comment</Link>
-                </div>
+            newComment = <NewComment postId={this.props.match.params.id}/>
+
         }
 
 
         return (
             <div className="container">
-                <div className="UserPosts-heading">
-                   <h1>{post.author}</h1>
-                </div>
                 {singlePost}
-
 
                 <hr/>
 
                 <div className="well">
                     <h3>Comments</h3>
                 </div>
-                {commentControls}
 
                 {commentList}
 
+                {newComment}
             </div>
         )
     }

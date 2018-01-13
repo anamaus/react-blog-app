@@ -1,0 +1,20 @@
+.NewPost label {
+    width: 100%;
+}
+
+.NewPost input,
+.NewPost textarea {
+    display: inline-block;
+    width: 100%;
+
+    margin: 10px 0 20px;
+}
+
+.NewPost textarea {
+    min-height: 200px;
+}
+
+
+.WarningMessage {
+    color: red;
+}

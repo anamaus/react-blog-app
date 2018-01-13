@@ -1,0 +1,40 @@
+.hidden {
+    display: none;
+}
+
+.Post {
+    position: relative;
+
+    padding: 15px;
+    margin-bottom: 50px;
+
+    background-color: #fff;
+    box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.CategorySingle{
+    position: absolute;
+    top:0;
+    right: 0;
+
+    padding: 5px 10px;
+    background-color: mediumpurple;
+    color: #fff;
+}
+
+.Title {
+    font-weight: bold;
+}
+
+.AuthorSingle {
+    font-style: italic;
+}
+
+.Content {
+    margin-bottom: 20px;
+}
+
+.Button {
+    color: mediumpurple;
+    font-weight: bold;
+}

@@ -13,7 +13,7 @@ import UserPosts from './containers/Users/UserPosts/UserPosts';
 import PostEdit from './containers/Posts/EditPost/EditPost';
 import ForbiddenPage from './components/Utils/Forbidden';
 import NewPost from './containers/Posts/NewPost/NewPost';
-import NewComment from  './components/Comments/NewComment/NewComment';
+import NewComment from './containers/Comments/NewComment/NewComment';
 
 import Wrapper from "./hoc/Wrapper";
 

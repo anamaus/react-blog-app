@@ -1,0 +1,20 @@
+.Edit label {
+    width: 100%;
+}
+
+.Edit input,
+.Edit textarea {
+    display: inline-block;
+    width: 100%;
+
+    margin: 10px 0 20px;
+}
+
+.Edit textarea {
+    min-height: 200px;
+}
+
+
+.WarningMessage {
+    color: red;
+}

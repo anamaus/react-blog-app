@@ -2,12 +2,12 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchAllPostsFromUser} from "../../../actions/postActions";
-import BlogList from "../../../components/Blog/BlogList";
+import BlogList from "../../../components/Post/PostList";
 import Wrapper from '../../../hoc/Wrapper';
 import {withRouter} from "react-router-dom";
 
 
-import './UserPosts.css';
+import classes from './UserPosts.css';
 
 class UserPosts extends React.Component {
     componentDidMount() {
@@ -20,9 +20,6 @@ class UserPosts extends React.Component {
         }
     }
 
-    componentWillUnmount(){
-        console.log('unmounted');
-    }
 
     render() {
         console.log(this.props);
@@ -45,7 +42,7 @@ class UserPosts extends React.Component {
 
         return (
             <div className='container'>
-                <div className="UserPosts-heading">
+                <div className={classes.UserPostsHeading}>
                     {heading}
                 </div>
                 {allPosts}

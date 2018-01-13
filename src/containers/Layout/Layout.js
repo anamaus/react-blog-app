@@ -2,7 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
-import BlogList from "../../components/Blog/BlogList";
+import classes from './Layout.css';
+
+import BlogList from "../../components/Post/PostList";
 
 //import actions
 import { fetchPosts } from '../../actions/postActions';
@@ -27,10 +29,19 @@ class Layout extends React.Component {
         //render list ends.
 
         return (
-            <div className='container'>
-                <h1>Welcome to Mis Blog</h1>
-                <hr/>
-                { blogList }
+            <div>
+                <div className={classes.Header}>
+                    <div className="container">
+                         <h1>Welcome to Mis Blog</h1>
+                    </div>
+                </div>
+                <div className={classes.Main}>
+                    <div className="container">
+                        <div className='row'>
+                            { blogList }
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

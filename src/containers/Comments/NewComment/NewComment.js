@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {addNewComment} from '../../../actions/commentsActions';
+import {withRouter} from 'react-router-dom';
 
 
 class NewComment extends React.Component {
@@ -11,16 +12,28 @@ class NewComment extends React.Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault();
-        addNewComment(this.props.match.params.postId,this.props.userAuth.id, this.state.content,
+        this.props.addNewComment(this.props.postId,this.props.userAuth.id, this.state.content,
             () => {
-                this.props.history.push('/');
+                this.setState({
+                    content: ''
+                })
             }
-            )
+        )
     };
 
     render() {
         return (
-            <div className='Edit col-sm-6 col-sm-offset-3'>
+            <div>
+                <form onSubmit={this.onSubmitHandler}>
+                    <div>
+                        <label>
+                            <textarea value={this.state.content} onChange={(event) => this.setState({content: event.target.value})}  />
+                        </label>
+                    </div>
+                        <input type="submit" value="Add comment" />
+                </form>
+            </div>
+            /*<div className='Edit col-sm-6 col-sm-offset-3'>
                 <div className="UserPosts-heading">
                     <h1>Create new comment</h1>
                 </div>
@@ -36,7 +49,7 @@ class NewComment extends React.Component {
                         <input type="submit" value="Submit" />
                     </div>
                 </form>
-            </div>
+            </div>*/
         )
     }
 }
@@ -44,7 +57,8 @@ class NewComment extends React.Component {
 const mapStateToProps = (state) => {
     return {
         userAuth: state.userReducer.currentUser,
+
     }
 };
 
-export default connect(mapStateToProps, {addNewComment})(NewComment);
+export default withRouter(connect(mapStateToProps, {addNewComment})(NewComment));

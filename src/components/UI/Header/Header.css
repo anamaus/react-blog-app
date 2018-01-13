@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+nav.navbar-default {
+    background-color: transparent;
+}
+
 .navbar-inverse .navbar-nav>li>a.active {
     color: mediumpurple;
 }

@@ -1,0 +1,30 @@
+.Header {
+    height: 400px;
+
+    background-image: url("../../images/bg.png");
+    background-size: cover;
+    background-position: center center;
+}
+
+.Header > div {
+    position: relative;
+
+    height: 100%;
+}
+
+.Header h1 {
+    position: relative;
+    top: 40%;
+
+    color: #fff;
+
+    font-size: 50px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+.Main {
+    padding-top: 100px;
+
+}
