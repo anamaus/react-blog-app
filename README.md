@@ -1,3 +1,13 @@
+WIP
+
+App is still in development.
+
+A blog application as a part of React learning proccess.
+Includes Redux.
+
+Uses Deployd for dummy database.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
